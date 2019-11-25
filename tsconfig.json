@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": false,
+    "baseUrl": ".",
+    "rootDir": "./",
+    "paths": {
+      "~/*": [
+        "./*"
+      ]
+    },
+    "types": [
+      "@types/node"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
