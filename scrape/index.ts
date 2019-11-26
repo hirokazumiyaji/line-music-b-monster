@@ -1,6 +1,6 @@
 import * as argv from 'argv'
 import * as fs from 'fs-extra'
-import * as fetch from 'node-fetch'
+import fetch from 'node-fetch'
 import * as puppeteer from 'puppeteer'
 import * as colors from 'colors/safe'
 import * as uuidv5 from 'uuid/v5'
