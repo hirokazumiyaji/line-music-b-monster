@@ -47,9 +47,12 @@ async function scrape(url: string): Promise<Output> {
 
   console.log(colors.green('finish scraping'))
 
+  const id: string = url.replace('https://music.line.me/playlist/', '')
+
   return {
     title: title,
     url: url,
+    link: `https://music.line.me/launch?cc=JP&target=playlist&item=${id}`,
     thumbnails: thumbnails
   }
 }
