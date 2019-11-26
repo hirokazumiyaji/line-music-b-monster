@@ -14,14 +14,18 @@
     "argv": "^0.0.2",
     "colors": "^1.4.0",
     "fs-extra": "^8.1.0",
-    "puppeteer": "^2.0.0"
+    "node-fetch": "^2.6.0",
+    "puppeteer": "^2.0.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@types/argv": "^0.0.4",
     "@types/colors": "^1.2.1",
     "@types/fs-extra": "^8.0.1",
     "@types/node": "^12.12.12",
+    "@types/node-fetch": "^2.5.4",
     "@types/puppeteer": "^2.0.0",
+    "@types/uuid": "^3.4.6",
     "typescript": "^3.8.0-dev.20191125"
   }
 }

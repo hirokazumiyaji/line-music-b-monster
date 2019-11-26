@@ -1,7 +1,9 @@
 import * as argv from 'argv'
 import * as fs from 'fs-extra'
+import fetch from 'node-fetch'
 import * as puppeteer from 'puppeteer'
 import * as colors from 'colors/safe'
+import * as uuidv5 from 'uuid/v5'
 
 const ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Safari/605.1.15'
 
@@ -24,7 +26,7 @@ async function getOutputPlaylist(path: string): Promise<Output[]> {
 }
 
 async function scrape(url: string): Promise<Output> {
-  console.log(colors.green(`start scraping ${url}`))
+  console.log(colors.cyan(`start scraping ${url}`))
 
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
@@ -40,15 +42,38 @@ async function scrape(url: string): Promise<Output> {
   const title = await page.$eval('.playlistInfo .des .title .txt', (it: any) => {
     return it.textContent
   })
-  const thumbnails = await page.evaluate(() => {
+  let thumbnails = await page.evaluate(() => {
     return Array.from(document.querySelectorAll('.playlistInfo .thumb img').values())
       .map(it => it.getAttribute('src'))
   })
   await browser.close()
 
-  console.log(colors.green('finish scraping'))
+  console.log(colors.cyan('finish scraping'))
+
+  console.log(colors.cyan('start download thumbnail'))
 
   const id: string = url.replace('https://music.line.me/playlist/', '')
+
+  await fs.ensureDir(`${options.output}/assets/images/playlists/${id}`)
+
+  thumbnails = await Promise.all(thumbnails.map(async (it: string) => {
+    const response = await fetch(it)
+    const contentType = response.headers.get('content-type')
+    const buffer = response.buffer()
+    let path = `${options.output}/assets/images/playlists/${id}/${uuidv5(it, uuidv5.URL)}`
+    switch (contentType) {
+      case 'image/jpeg':
+        path = `${path}.jpg`
+        break
+      case 'image/png':
+        path = `${path}.png`
+        break
+    }
+    await fs.writeFile(path, buffer)
+    return path.replace(options.output, '')
+  }))
+
+  console.log(colors.cyan('finish download thumbnail'))
 
   return {
     title: title,
@@ -66,7 +91,7 @@ argv.option({
   name: 'output',
   short: 'o',
   type: 'string',
-  description: 'output file path'
+  description: 'output directory'
 })
 argv.option({
   name: 'input',
@@ -77,9 +102,11 @@ argv.option({
 
 const options = argv.run().options
 
+const outputJsonFilePath = `${options.output}/assets/json/playlist.json`
+
 Promise.all([
   listPlaylistLinks(options.input),
-  getOutputPlaylist(options.output)
+  getOutputPlaylist(outputJsonFilePath)
 ]).then(async (result: any) => {
   const links: string[] = result[0]
   let output: Output[] = result[1]
@@ -94,7 +121,7 @@ Promise.all([
   )
   return output
 }).then(async (result: Output[]) => {
-  return await writeOutput(options.output, result)
+  return await writeOutput(outputJsonFilePath, result)
 }).then(_ => {
   console.log(colors.green('success'))
 }).catch((e: Error) => {
