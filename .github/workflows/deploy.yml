@@ -1,0 +1,26 @@
+name: deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: setup nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: build
+        working-directory: web
+        run: |
+          yarn install
+          yarn build
+      - name: deploy
+        working-directory: web
+        run: |
+          yarn deploy -n ${{ secrets.NOW_PROJECT_NAME }} -t ${{ secrets.ZEIT_TOKEN }} --prod
