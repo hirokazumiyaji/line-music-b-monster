@@ -25,7 +25,7 @@
   <v-content>
     <div class="d-flex align-center flex-wrap">
       <v-col cols="6" sm="3" md="3" lg="2" v-for="(playlist, i) in playlists" :key="i">
-        <v-card @click="onClickPlaylist(playlist.url)">
+        <v-card @click="onClickPlaylist(playlist.link)">
           <div style="display: flex; flex-wrap: wrap;">
             <div
               style="width: 50%;"
@@ -75,6 +75,7 @@ export default {
             return {
               title: it.title,
               url: it.url,
+              link: it.link,
               thumbnails: thumbnails
             }
           })
