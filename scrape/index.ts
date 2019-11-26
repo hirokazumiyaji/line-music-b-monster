@@ -8,6 +8,7 @@ const ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (
 type Output = {
   title: string
   url: string
+  link: string
   thumbnails: string[]
 }
 
