@@ -26,7 +26,7 @@ async function getOutputPlaylist(path: string): Promise<Output[]> {
 }
 
 async function scrape(url: string): Promise<Output> {
-  console.log(colors.green(`start scraping ${url}`))
+  console.log(colors.cyan(`start scraping ${url}`))
 
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
@@ -48,7 +48,9 @@ async function scrape(url: string): Promise<Output> {
   })
   await browser.close()
 
-  console.log(colors.green('finish scraping'))
+  console.log(colors.cyan('finish scraping'))
+
+  console.log(colors.cyan('start download thumbnail'))
 
   const id: string = url.replace('https://music.line.me/playlist/', '')
 
@@ -69,9 +71,10 @@ async function scrape(url: string): Promise<Output> {
     }
     await fs.writeFile(path, buffer)
     return path.replace(options.output, '')
-  })
-  
-  
+  }))
+
+  console.log(colors.cyan('finish download thumbnail'))
+
   return {
     title: title,
     url: url,
