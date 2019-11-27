@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json --outDir ./dist",
-    "start": "node dist/index.js -i ./in/playlist.json -o ../web/public/assets/json/playlists.json"
+    "start": "node dist/index.js -i ./in/playlist.json -o ../web/public/assets"
   },
   "repository": "https://github.com/hirokazumiyaji/line-music-b-monster",
   "author": "Hirokazu Miyaji",
@@ -12,16 +12,21 @@
   "private": true,
   "dependencies": {
     "argv": "^0.0.2",
+    "axios": "^0.19.0",
     "colors": "^1.4.0",
     "fs-extra": "^8.1.0",
-    "puppeteer": "^2.0.0"
+    "puppeteer": "^2.0.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@types/argv": "^0.0.4",
+    "@types/axios": "^0.14.0",
     "@types/colors": "^1.2.1",
     "@types/fs-extra": "^8.0.1",
     "@types/node": "^12.12.12",
+    "@types/node-fetch": "^2.5.4",
     "@types/puppeteer": "^2.0.0",
+    "@types/uuid": "^3.4.6",
     "typescript": "^3.8.0-dev.20191125"
   }
 }
