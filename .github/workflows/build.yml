@@ -18,17 +18,21 @@ jobs:
           yarn install
           yarn build
           yarn start
-      - name: commit
-        if: "!contains(github.event.head_commit.message, '[ci skip]')"
+      - name: check changes
         run: |
-          if [ `git status -s | wc -l` -ne "0" ]; then
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git commit -m "[ci skip] scraping done" -a
-          fi
-      - name: push
-        if: "!contains(github.event.head_commit.message, '[ci skip]')"
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.head_ref }}
+          git status -s
+      # - name: commit
+      #   if: "!contains(github.event.head_commit.message, '[ci skip]')"
+      #   run: |
+      #     git status -s
+      #     if [ `git status -s | wc -l` -ne "0" ]; then
+      #       git config --local user.email "action@github.com"
+      #       git config --local user.name "GitHub Action"
+      #       git commit -m "[ci skip] scraping done" -a
+      #     fi
+      # - name: push
+      #   if: "!contains(github.event.head_commit.message, '[ci skip]')"
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.head_ref }}
