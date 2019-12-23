@@ -23,10 +23,10 @@
     "@types/axios": "^0.14.0",
     "@types/colors": "^1.2.1",
     "@types/fs-extra": "^8.0.1",
-    "@types/node": "^12.12.12",
+    "@types/node": "^12.12.21",
     "@types/node-fetch": "^2.5.4",
     "@types/puppeteer": "^2.0.0",
     "@types/uuid": "^3.4.6",
-    "typescript": "^3.8.0-dev.20191125"
+    "typescript": "^3.7.4"
   }
 }
