@@ -1,17 +1,56 @@
 {
-  "links": [
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwB0C9J9vNz",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n0pFuGyItkwHSozLbBf",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n0pFuGyItkwN_ZjPf7j",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n0pFuGyItkVm11MUGqG",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwr_MiaCU2Y",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwB7EejZJnJ",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwsRpl9NdDd",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwlvI_PXHlL",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwqvqQnVFrF",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwqA7RuaMwQ",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwrf1PVGY-c",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n0pFuGyItkE5HxJTDpH",
-    "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwhbM5_wCeC"
+  "playlists": [
+    {
+      "name": "The Chainsmokers",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwB0C9J9vNz"
+    },
+    {
+      "name": "KAIYA normal+",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n0pFuGyItkwHSozLbBf"
+    },
+    {
+      "name": "Steve Aoki",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n0pFuGyItkwN_ZjPf7j"
+    },
+    {
+      "name": "TASUKU vol.1",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n0pFuGyItkVm11MUGqG"
+    },
+    {
+      "name": "SATSUKI vol.1",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwr_MiaCU2Y"
+    },
+    {
+      "name": "Gryffin",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwB7EejZJnJ"
+    },
+    {
+      "name": "K-POP2",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwsRpl9NdDd"
+    },
+    {
+      "name": "KAORI vol.2",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwlvI_PXHlL"
+    },
+    {
+      "name": "SATSUKI vol.2",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwqvqQnVFrF"
+    },
+    {
+      "name": "LUNY vol.1",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwqA7RuaMwQ"
+    },
+    {
+      "name": "JIN vol.1",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwrf1PVGY-c"
+    },
+    {
+      "name": "ROCK(Q)",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n0pFuGyItkE5HxJTDpH"
+    },
+    {
+      "name": "NIKA vol.1",
+      "url": "https://music.line.me/playlist/upi7nLrdtfvhxjzl_n_DrlKeMpwhbM5_wCeC"
+    }
   ]
 }
