@@ -7,6 +7,11 @@ import * as uuidv5 from 'uuid/v5'
 
 const ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Safari/605.1.15'
 
+type Input = {
+  name: string
+  url: string
+}
+
 type Output = {
   title: string
   url: string
@@ -14,10 +19,10 @@ type Output = {
   thumbnails: string[]
 }
 
-async function listPlaylistLinks(path: string): Promise<string[]> {
+async function listPlaylistLinks(path: string): Promise<Input[]> {
   const buffer = await fs.readFile(path)
   const json = JSON.parse(buffer.toString())
-  return json.links
+  return json.playlists
 }
 
 async function getOutputPlaylist(path: string): Promise<Output[]> {
@@ -25,8 +30,8 @@ async function getOutputPlaylist(path: string): Promise<Output[]> {
   return JSON.parse(buffer.toString())
 }
 
-async function scrape(playlistID: string, url: string): Promise<Output> {
-  console.log(colors.cyan(`start scraping ${url}`))
+async function scrape(playlistID: string, input: Input): Promise<Output> {
+  console.log(colors.cyan(`start scraping ${input.url}`))
 
   const browser = await puppeteer.launch()
 
@@ -35,25 +40,22 @@ async function scrape(playlistID: string, url: string): Promise<Output> {
     await page.setUserAgent(ua)
     await page.setViewport({ width: 1200, height: 800 })
     await page.setJavaScriptEnabled(true)
-    await page.goto(url, { waitUntil: 'domcontentloaded' })
+    await page.goto(input.url, { waitUntil: 'domcontentloaded' })
 
     await page.waitForSelector('.playlistInfo .des .title .txt')
     await page.waitForSelector('.playlistInfo .thumb img')
     await page.waitFor(5000)
 
-    const title = await page.$eval('.playlistInfo .des .title .txt', (it: any) => {
-      return it.textContent
-    })
     let thumbnails = await page.evaluate(() => {
       return Array.from(document.querySelectorAll('.playlistInfo .thumb img').values())
         .map(it => it.getAttribute('src'))
     })
 
-    console.log(colors.cyan(`finish scraping ${url}`))
+    console.log(colors.cyan(`finish scraping ${input.url}`))
 
     return {
-      title: title,
-      url: url,
+      title: input.name,
+      url: input.url,
       link: `https://music.line.me/launch?cc=JP&target=playlist&item=${playlistID}`,
       thumbnails: thumbnails
     }
@@ -133,20 +135,20 @@ Promise.all([
   listPlaylistLinks(options.input),
   getOutputPlaylist(outputJsonFilePath)
 ]).then(async (result: any) => {
-  const links: string[] = result[0]
+  const inputs: Input[] = result[0]
   let output: Output[] = result[1]
   output = await Promise.all(
-    links.map(async (link: string) => {
-      let o = output.find((it: Output) => it.url === link)
+    inputs.map(async (input: Input) => {
+      let o = output.find((it: Output) => it.url === input.url)
       if (o) {
         return o
       }
 
-      const playlistID: string = link.replace('https://music.line.me/playlist/', '')
+      const playlistID: string = input.url.replace('https://music.line.me/playlist/', '')
       const dir = `${options.output}/images/playlists/${playlistID}`
       await fs.ensureDir(dir)
 
-      o = await scrape(playlistID, link)
+      o = await scrape(playlistID, input)
       o.thumbnails = await downloadImages(o.thumbnails, dir)
       return o
     })
