@@ -1,35 +1,6 @@
 <template>
 <v-app>
-  <v-app-bar app>
-    <div class="d-flex align-center justify-space-between" style="width: 100%;">
-      <div style="flex-basis: 10%;"></div>
-      <div class="d-flex align-center">
-        <v-img
-          alt="LINE MUSIC Logo"
-          class="shrink mr-2"
-          contain
-          src="/assets/images/line-music.jpg"
-          transition="scale-transition"
-          height="56"
-          width="100"
-        />
-        <v-icon style="color: #000000; font-weight: bold;">mdi-close</v-icon>
-        <v-img
-          alt="b-monster Logo"
-          class="shrink ml-2"
-          contain
-          src="/assets/images/b-monster.png"
-          height="56"
-          width="112"
-        />
-      </div>
-      <div style="flex-basis: 10%; text-align: right;">
-        <v-icon style="color: #000000; font-weight: bold;" @click="onClickSearch">
-          mdi-magnify
-        </v-icon>
-      </div>
-    </div>
-  </v-app-bar>
+  <app-bar @click-search="onClickSearch"></app-bar>
   <v-content>
     <v-container v-show="showSearch">
       <v-text-field
@@ -43,19 +14,7 @@
     </v-container>
     <div class="d-flex align-center flex-wrap">
       <v-col cols="6" sm="3" md="3" lg="2" v-for="(item, i) in items" :key="i">
-        <v-card @click="onClickPlaylist(item.link)">
-          <div style="display: flex; flex-wrap: wrap;">
-            <div
-              style="width: 50%;"
-              v-for="(thumbnail, j) in item.thumbnails" :key="j"
-            >
-              <v-img v-show="thumbnail !== ''" :src="thumbnail"></v-img>
-            </div>
-          </div>
-          <v-card-text style="font-weight: bold; font-size: 0.7rem;">
-            {{ item.title }}
-          </v-card-text>
-        </v-card>
+        <app-playlist-card :item="item"></app-playlist-card>
       </v-col>
     </div>
   </v-content>
@@ -82,9 +41,6 @@ export default {
   methods: {
     onClickSearch() {
       this.showSearch = !this.showSearch
-    },
-    onClickPlaylist(url) {
-      window.open(url)
     }
   },
   async created() {
